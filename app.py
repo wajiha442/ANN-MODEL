@@ -1,12 +1,11 @@
-import streamlit as st
+ import streamlit as st
 import numpy as np
-import pickle
+import joblib
 from tensorflow.keras.models import load_model
 
 model = load_model("ann_jobs_model.h5")
 
-with open("preprocessor.pkl", "rb") as f:
-    preprocessor = pickle.load(f)
+preprocessor = joblib.load("preprocessor.pkl")
 
 st.title("AI Job Automation Prediction (2030)")
 st.write("Enter feature values to predict the automation probability of a job in 2030.")
@@ -24,3 +23,4 @@ if st.button("Predict"):
     pred = model.predict(input_processed)[0][0]
     pred_class = "High Automation Risk" if pred > 0.5 else "Low Automation Risk"
     st.success(f"Predicted Automation Risk: {pred_class} ({pred:.2f})")
+
