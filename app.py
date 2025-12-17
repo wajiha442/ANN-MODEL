@@ -1,4 +1,4 @@
- import streamlit as st
+import streamlit as st
 import numpy as np
 import joblib
 from tensorflow.keras.models import load_model
@@ -23,4 +23,5 @@ if st.button("Predict"):
     pred = model.predict(input_processed)[0][0]
     pred_class = "High Automation Risk" if pred > 0.5 else "Low Automation Risk"
     st.success(f"Predicted Automation Risk: {pred_class} ({pred:.2f})")
+
 
